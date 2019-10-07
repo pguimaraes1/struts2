@@ -11,15 +11,21 @@
 		value="ApplicationResources" />
 
 	<package name="default" extends="struts-default" namespace="/">
-		<action name="login" method="execute" class="net.viralpatel.struts2.LoginAction">
-			<result name="success">Welcome.jsp</result>
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+		<action name="login" class="net.viralpatel.struts2.LoginAction">
+			<result name="success" type="tiles">/welcome.tiles</result>
 			<result name="error">Login.jsp</result>
 		</action>
-
-		<action name="customer" method="addCustomer"
+		<action name="customer"
 			class="net.viralpatel.struts2.CustomerAction">
-			<result name="success">SuccessCustomer.jsp</result>
-			<result name="input">Customer.jsp</result>
+			<result name="success" type="tiles">/customer.success.tiles</result>
+			<result name="input" type="tiles">/customer.tiles</result>
+		</action>
+		<action name="customer-form">
+			<result name="success" type="tiles">/customer.tiles</result>
 		</action>
 	</package>
 </struts>
