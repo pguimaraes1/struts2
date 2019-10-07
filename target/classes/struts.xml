@@ -16,6 +16,7 @@
 				class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
 
+		<!-- Interceptors -->
 		<interceptors>
 			<interceptor name="mylogging"
 				class="net.viralpatel.struts2.interceptor.MyLoggingInterceptor">
@@ -25,14 +26,17 @@
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		
+
 		<default-interceptor-ref name="loggingStack"></default-interceptor-ref>
 
+		<!-- Login -->
 		<action name="login" class="net.viralpatel.struts2.LoginAction">
 			<interceptor-ref name="loggingStack"></interceptor-ref>
 			<result name="success" type="tiles">/welcome.tiles</result>
 			<result name="error">Login.jsp</result>
 		</action>
+
+		<!-- formulario de cadastro -->
 		<action name="customer"
 			class="net.viralpatel.struts2.CustomerAction">
 			<result name="success" type="tiles">/customer.success.tiles</result>
@@ -41,6 +45,28 @@
 		<action name="customer-form">
 			<result name="success" type="tiles">/customer.tiles</result>
 		</action>
+
+		<!-- upload de arquivos -->
+		<action name="userImage"
+			class="net.viralpatel.struts2.FileUploadAction">
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="tiles">/userimage.success.tiles</result>
+			<result name="input" type="tiles">/userimage.tiles</result>
+		</action>
+		<!-- ajax demo  -->
+		<action name="ajaxdemo"
+			class="net.viralpatel.struts2.AjaxAutocomplete">
+			<interceptor-ref name="loggingStack"></interceptor-ref>
+			<result name="success" type="tiles">/ajaxdemo.tiles</result>
+			<result type="tiles">/ajaxdemo.tiles</result>
+		</action>
+
 	</package>
 
 
